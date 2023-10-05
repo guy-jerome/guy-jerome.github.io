@@ -1,0 +1,49 @@
+body{
+  margin: 0;
+  background-color: rgba(19, 70, 22, 0.295);
+}
+
+nav{
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+nav h1{
+  font-size: 300%;
+}
+main {
+  background-image: url(./images/pond.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: flex;
+  margin: 0; 
+  padding: 0;
+}
+
+#sidebar {
+  width: 300px;
+  background-color: black;
+  color: white;
+  padding: 20px;
+  height: 100vh;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+#sidebar ul{
+  padding: 20px
+}
+#sidebar li{
+  padding: 10px
+}
+#sidebar a{
+  color: azure;
+}
+#content{
+  margin-left: 320px; /* Adjust the margin to account for sidebar width */
+  padding: 20px;
+  flex: .7;
+  background-color: rgba(145, 118, 83, 0.484);
+  justify-content: center;
+  text-align: center;
+  color: rgb(255, 254, 254);
+}
+

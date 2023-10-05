@@ -1,51 +1,56 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-        
-        #draggable-element {
-            width: 100px;
-            height: 100px;
-            background-color: #3498db;
-            position: absolute;
-            cursor: pointer;
-        }
-    </style>
-    <title>Draggable Element</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="style.css"/>
+    <title>Duck Attack</title>
 </head>
 <body>
-    <div id="draggable-element"></div>
+    <nav id = "nav">
+        <h1><strong>Duck Attack</strong></h1>
+    </nav>
+    <main>
+        <div id="sidebar">
+            <h1>DUCK STUFF</h1>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Duck" target="_blank">LEARN MORE ABOUT DUCKS</a></li>
+                <li><a href="https://www.pinterest.com/pin/247486942010027811/" target="_blank">Duck Memes
+                </a></li>
+                <li><a href="https://www.rd.com/article/duck-jokes/" target="_blank">Duck Jokes
+                </a></li>
+            </ul>
+            <hr>
+            <h2>Duck Knowledge</h2>
+            <p><b>Duck Quacks Don't Echo:</b>This is a popular myth that claims a duck's quack doesn't produce an echo. While it's not entirely true, duck quacks are indeed known for their distinctive sound.
+                <br>
+                <hr>
+                <b>Feather Waterproofing:</b>Ducks have a special gland near their tFeather Waterproofing:ails called the uropygial gland that secretes oil. They use this oil to waterproof their feathers, which helps them stay dry while swimming.
+                <br>
+                <hr>
+                <b>Ducklings Follow Mom:</b>Ducklings are known for their strong attachment to their mother. They instinctively follow her around, forming an adorable duckling parade.
+                <br>
+                <hr>
+                <b>Webbed Feet:</b>Ducks have webbed feet, which act like paddles when they swim. It's their built-in swimming equipment!
+                <br>
+                <hr>
+                <b>Duck Waddles:</b>Ducks waddle when they walk because their legs are placed far apart, making it a bit awkward and comical to watch.
+                <br>
+                <hr>
+                <B>Ducks Sleep with One Eye Open:</B> Ducks have a unique ability to sleep with one eye open, which helps them stay vigilant for potential predators.
+                <br>
 
-    <script>
-        const element = document.getElementById('draggable-element');
-        let isDragging = false;
-        let offsetX, offsetY;
+                </p>
+        </div>
+        <div id="content">
+            <h1>Presenting DUCKS:</h1>
 
-        element.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            offsetX = e.clientX - element.getBoundingClientRect().left;
-            offsetY = e.clientY - element.getBoundingClientRect().top;
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            if (isDragging) {
-                const x = e.clientX - offsetX;
-                const y = e.clientY - offsetY;
-                element.style.left = x + 'px';
-                element.style.top = y + 'px';
-            }
-        });
-
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-        });
-    </script>
+            <img src="./images/duck.png" width="350" alt="White duck png" />
+            <img src="./images/duck.png" width="350" alt="White duck png" />
+            <img src="./images/duck.png" width="350" alt="White duck png" />
+        </div>
+    </main>
 </body>
 </html>
+
