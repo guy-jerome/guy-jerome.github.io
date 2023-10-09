@@ -1,7 +1,6 @@
 const taskInput = document.querySelector("#task-input");
 const submit = document.querySelector("#submit");
-const taskArea = document.querySelector("#task-area")
-
+const taskArea = document.querySelector("#task-area");
 
 // Load tasks from localStorage when the page loads
 window.addEventListener("load", () => {
@@ -11,18 +10,18 @@ window.addEventListener("load", () => {
   });
 });
 
-submit.addEventListener("click", ()=>{
-  addTask();
-})
+submit.addEventListener("click", () => {
+  addTask(taskInput.value); // Pass the task text as an argument
+});
 
 taskInput.addEventListener("keydown", (event) => {
   if (event.keyCode === 13) { // Check if Enter key (key code 13) is pressed
-    addTask();
+    addTask(taskInput.value); // Pass the task text as an argument
   }
 });
 
-function addTask() {
-  if (taskInput.value) {
+function addTask(taskText) {
+  if (taskText) { // Use the taskText argument
     let div = document.createElement("div");
     let task = document.createElement("span");
     let check = document.createElement("input");
@@ -30,12 +29,12 @@ function addTask() {
     div.classList.add("task-div");
     check.type = "checkbox";
     check.classList.add("check");
-    task.textContent = taskInput.value;
+    task.textContent = taskText; // Use the provided taskText
     task.classList.add("task");
     deleteBtn.textContent = "Delete";
     deleteBtn.classList.add("delete-btn");
     deleteBtn.addEventListener("click", () => {
-      task.parentElement.parentElement.removeChild(task.parentElement);
+      div.parentElement.removeChild(div); // Remove the div containing the task
       saveTasks();
     });
 
