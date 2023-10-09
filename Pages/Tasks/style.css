@@ -1,0 +1,108 @@
+/* Reset default margin and padding for body */
+html{
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f3d8b5;
+  height: 100%;
+}
+main {
+  display: flex;
+  height: 100%;
+}
+
+nav{
+  width: 200px;
+  height: 100%;
+  background-color: #333;
+  color:#ccc;
+  text-align: center;
+
+}
+/* Style the header */
+h1 {
+  text-align: center;
+  color: #333;
+  margin-top: 20px;
+}
+
+/* Style the label for the task input */
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+#task-area{
+  margin-left:20%;
+  margin-right:20%
+}
+
+/* Style the task input */
+#task-input {
+  width: 100%;
+  padding: 10px;
+  border: solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+/* Style the submit button */
+#submit {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+/* Style the submit button on hover */
+#submit:hover {
+  background-color: #0056b3;
+}
+
+/* Add some spacing between the input and button */
+br {
+  margin: 10px 0;
+}
+
+/* Style for the task container div */
+.task-div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+/* Style for the checkbox */
+.check {
+  margin-right: 10px;
+  size: 150%;
+}
+
+/* Style for the task text */
+.task {
+  flex-grow: 1; /* Expands to fill available space */
+  font-size: 16px;
+}
+
+/* Style for the delete button */
+.delete-btn {
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
