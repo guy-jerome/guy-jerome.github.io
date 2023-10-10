@@ -4,18 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="style.css"/>
-  <title>Document</title>
+  <title>Duck Gallery</title>
 </head>
 <body>
-
+  <nav>
+    <h3><a href="../../index.html">DUCK PAGE</a></h3>
+    <h3><a href="../Tasks/task.html">Tasks</a></h3>
+    <h3><a href="https://business-thiem.github.io/basicWebPageFun/" target="_blank">You're Finally Awake</a></h3>
+    <a href="https://fleshcorp.neocities.org" target="_blank"><img src="https://fleshcorp.neocities.org/img/mossbutton.gif" alt="Come on over to MOSSTOWN!"></a>
+  </nav>
+  <h1>Duck Gallery</h1>
   <div id="ducks">
-    <button id="scroll-right">Scroll</button>
-    <img src="../../images/duck1.jpg" alt="duck1" class="duck"/>
-    <img src="../../images/duck2.jpg" alt="duck2" class="duck"/>
-    <img src="../../images/duck3.jpg" alt="duck3" class="duck"/>
-    <img src="../../images/duck4.jpg" alt="duck4" class="duck"/>
-    <button id="scroll-left">Scroll</button>
+    <button id="scroll-left" class="scroll">Prev</button>
+    <div id = slide-show>
+      <img src="../../images/duck1.jpg" alt="duck1" class="duck"/>
+      <img src="../../images/duck2.jpg" alt="duck2" class="duck"/>
+      <img src="../../images/duck3.jpg" alt="duck3" class="duck"/>
+    </div>
+    <button id="scroll-right" class="scroll">Next</button>
   </div>
-  <script src="script.js"></script>
+  <script src="script.js" ></script>
 </body>
 </html>
