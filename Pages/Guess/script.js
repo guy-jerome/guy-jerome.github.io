@@ -1,30 +1,59 @@
+const guessingGame = document.querySelector("#guessing-game");
 const inputBox = document.querySelector("#input-box");
 const guessBtn = document.querySelector("#guess-btn");
 const response = document.querySelector("#response");
 
+const login = document.querySelector("#login");
+const userName = document.querySelector("#user-name");
+const submitName = document.querySelector("#submit-name");
+const nameResponse = document.querySelector("#name-response");
+
+const gameOver = document.querySelector("#game-over");
+const yesBtn = document.querySelector("#yes-btn")
+const noBtn = document.querySelector("#no-btn")
+const winning = document.querySelector("#winning")
+const newLogin = document.querySelector("#new-login")
+const yesNo = document.querySelector("#yes-no")
 class Player {
     static players = []
 
     static currentPlayer;
 
-    static validatePlayer(name){
-        Player.players.forEach((player)=>{
-            if (player.name === name) return true
-        })
-        return false
+    static validatePlayer(name) {
+        for (const player of Player.players) {
+            if (player.name === name) {
+                return player; // Return the player object if found
+            }
+        }
+        return false; // Return false if the player with the specified name is not found
     }
+    static validateName(name){
+        if(name){
+            return true
+        }else{
+            return false
+        }
+    }
+    
 
     constructor(name){
         this.name = name
         this.recordGuess = null;
-        this.guessGames = {};
-        this.gameNumber = 1;
+        this.guessGames = []
+        this.gameNumber = 0;
         Player.players.push(this)
     }
     addGame(game){
         //takes in an array
-        this.guessGames[`game${this.gameNumber}`] = game
+        this.guessGames.push(game)
         this.gameNumber++
+    }
+    getLastGame(){
+        if (this.guessGames.length > 1){
+            return this.guessGames[this.gameNumber - 1].guessNumber
+        }else{
+            return 0
+        }
     }
 }
 
@@ -44,13 +73,13 @@ class Game {
         this.guessNumber = 0
         this.gameNumber = Game.gamesNumber 
     }
-    checkNumber(guess){
+    checkNumber(guess, player){
         if (guess > this.rand){
             return ["Guess Lower",false]
         } else if (guess < this.rand){
-            return ["Guess Heigher",false]
+            return ["Guess Higher",false]
         } else{
-            return [this.createWinMessage(),true]
+            return [this.createWinMessage(player),true]
         }
     }
     validateInput(input){
@@ -69,27 +98,56 @@ class Game {
     setRandom(num){
         this.rand = num
     }
-    createWinMessage(){
-        return `YOU WON! YOU GUESSED ${this.guessNumber} TIMES, WITH THESE GUESSES ${this.guesses.join(", ")}`
+    createWinMessage(player){
+        let lastGame = player.getLastGame();
+        console.log(lastGame)
+        let message = `YOU WON! YOU GUESSED ${this.guessNumber} TIMES, WITH THESE GUESSES ${this.guesses.join(", ")}!`
+        if(lastGame === 0){
+            message += "This is your first game."
+        }else if(lastGame < this.guessNumber){
+            message += `You made ${this.guessNumber - lastGame} more guesses than last time`
+        }else if (lastGame > this.guessNumber){
+            message += `You made ${lastGame - this.guessNumber} less guesses than last time`
+        }else if (lastGame === this.guessNumber){
+            message += "You had the same number of guesses as last time"
+        }
+        return message
+
     }
     
 }
 
 
-player = new Player("Bob")
-Player.currentPlayer = player
-Game.createGame()
+
+submitName.addEventListener("click", ()=>{
+    if (Player.validateName(userName.value)){
+        let player = Player.validatePlayer(userName.value)
+        player ? Player.currentPlayer = player: Player.currentPlayer = new Player(userName.value)
+        guessingGame.style.display = "block";
+        login.style.display = "none";
+        Game.createGame()
+    }else{
+        nameResponse.textContent = "Invalid Name"
+    }
+        userName.value = ""
+
+})
 
 guessBtn.addEventListener("click", ()=>{
     
     if (Game.currentGame.validateInput(inputBox.value)){
         Game.currentGame.updateGuess(inputBox.value)
-        let answer = Game.currentGame.checkNumber(inputBox.value)
+        let answer = Game.currentGame.checkNumber(inputBox.value, Player.currentPlayer)
         response.textContent = answer[0]
         if (answer[1]){
-            console.log(Game.currentGame)
             Player.currentPlayer.addGame(Game.currentGame)
-            Game.createGame()
+            guessingGame.style.display = "none";
+            gameOver.style.display = "block";
+            winning.textContent = answer[0]
+            response.textContent = ""
+            
+
+            
         }
     }else{
         response.textContent = Game.currentGame.error
@@ -97,74 +155,27 @@ guessBtn.addEventListener("click", ()=>{
     inputBox.value = "";
 } )
 
-
-
-
-// let guessGame = true;
-// let players = [];
-// let currentPlayer;
-// while(guessGame){
-//   let rand = Math.floor(Math.random() * (101 - 1)+ 1);
-//   let playing = true;
-//   let guessArr = [];
-//   let name = prompt("What is your name?");
-//   currentPlayer = null;
-
-//   for (let i of players){
-//     if(i.name === name){
-//       currentPlayer = i;
-//       break;
-//     }
-//   }
-
-//   if (currentPlayer === null){
-//     let player = {
-//       name:name,
-//       previousScore:0
-//     }
-//     currentPlayer = player;
-//     players.push(player);
-//   }
-
-
-//   while(playing){
-//     let message = "";
-//     let guess = prompt("Guess a Number between 1-100:");
-//     guess = parseInt(guess);
-//     if(guess === NaN || guess > 100 || guess < 1){
-//       message = `Invalid Guess ${name}! Please Guess Again!`
-//     }
-//     else if (guess === rand){
-//       guessArr.push(guess)
-//       if (currentPlayer.previousScore === 0){
-//         message = `Correct ${name}! It only took you ${guessArr.length} guesses! and your guesses were ${guessArr.join(", ")}!`
-//       } 
-//       else if (currentPlayer.previousScore < guessArr.length){
-//           message = `Correct ${name}! It only took you ${guessArr.length} guesses! and your guesses were ${guessArr.join(", ")}! You had ${guessArr.length - currentPlayer.previousScore} more guesses than last time`
-//       } 
-//       else if (currentPlayer.previousScore > guessArr.length){
-//           message = `Correct ${name}! It only took you ${guessArr.length} guesses! and your guesses were ${guessArr.join(", ")}! You had ${currentPlayer.previousScore - guessArr.length} less guesses than last time`
-//       }
-//       else{
-//           message = `Correct ${name}! It only took you ${guessArr.length} guesses! and your guesses were ${guessArr.join(", ")}! You had the same number of guesses than last time`
-//       }
-//       currentPlayer.previousScore = guessArr.length;
-//       playing = false;
-//     }
-//     else if (guess > rand){
-//       guessArr.push(guess)
-//       message = `You need to guess lower ${name}.`
-//     }else{
-//       guessArr.push(guess)
-//       message = `You need to guess higher ${name}.`
-//     }
+newLogin.addEventListener("click", ()=>{
+    gameOver.style.display = "none";
+    login.style.display = "block";
+    winning.textContent = "";
     
-//     alert(message)
-//   }
+})
 
-//   let question = prompt("do you want to play again? Yes or No")
-//   if (question.toUpperCase() === "NO"){
-//     alert("Thanks for Playing")
-//     guessGame = false
-//   }
-// }
+yesNo.addEventListener("click", (event)=>{
+    if (event.target === yesBtn){
+        gameOver.style.display = "none";
+        guessingGame.style.display = "block";
+        Game.createGame()
+    } else if (event.target === noBtn){
+        gameOver.style.display = "none";
+    }
+
+})
+
+
+
+
+guessingGame.style.display = "none";
+gameOver.style.display = "none";
+
