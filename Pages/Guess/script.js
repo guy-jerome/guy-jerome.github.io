@@ -49,10 +49,10 @@ class Player {
         this.gameNumber++
     }
     getLastGame(){
-        if (this.guessGames.length > 1){
+        if (this.guessGames.length > 0){
             return this.guessGames[this.gameNumber - 1].guessNumber
         }else{
-            return 0
+            return null
         }
     }
 }
@@ -70,7 +70,7 @@ class Game {
         this.rand = 50//Math.floor(Math.random() * (101 - 1)+ 1);
         this.error = "Invalid Answer"
         this.guesses = []
-        this.guessNumber = 0
+        this.guessNumber = null
         this.gameNumber = Game.gamesNumber 
     }
     checkNumber(guess, player){
@@ -102,7 +102,7 @@ class Game {
         let lastGame = player.getLastGame();
         console.log(lastGame)
         let message = `YOU WON! YOU GUESSED ${this.guessNumber} TIMES, WITH THESE GUESSES ${this.guesses.join(", ")}!`
-        if(lastGame === 0){
+        if(lastGame === null){
             message += "This is your first game."
         }else if(lastGame < this.guessNumber){
             message += `You made ${this.guessNumber - lastGame} more guesses than last time`
@@ -116,10 +116,7 @@ class Game {
     }
     
 }
-
-
-
-submitName.addEventListener("click", ()=>{
+submit = ()=>{
     if (Player.validateName(userName.value)){
         let player = Player.validatePlayer(userName.value)
         player ? Player.currentPlayer = player: Player.currentPlayer = new Player(userName.value)
@@ -131,6 +128,18 @@ submitName.addEventListener("click", ()=>{
     }
         userName.value = ""
 
+}
+
+guess = 
+
+submitName.addEventListener("click", submit)
+
+userName.addEventListener("keydown", event=>{
+    console.log("pressed")
+    if (event.key === "Enter" || event.keyCode === 13){
+        console.log("pressed")
+        submit();
+    }
 })
 
 guessBtn.addEventListener("click", ()=>{
@@ -145,15 +154,13 @@ guessBtn.addEventListener("click", ()=>{
             gameOver.style.display = "block";
             winning.textContent = answer[0]
             response.textContent = ""
-            
-
-            
         }
     }else{
         response.textContent = Game.currentGame.error
     }
     inputBox.value = "";
 } )
+
 
 newLogin.addEventListener("click", ()=>{
     gameOver.style.display = "none";
