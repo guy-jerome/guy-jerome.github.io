@@ -1,0 +1,22 @@
+
+html, body {
+  height: 100%;
+}
+
+main {
+  background-color: rgb(192, 182, 135);
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  
+  flex-wrap: wrap;
+  height: 800px;
+  width: 800px;
+}
+
+.squares{
+  width: 12.5%;
+  height: 12.5%;
+  border: .5vh solid black;
+  box-sizing: border-box;
+}
