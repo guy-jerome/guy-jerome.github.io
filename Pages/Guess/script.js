@@ -67,7 +67,7 @@ class Game {
         Game.gamesNumber++
     }
     constructor(){
-        this.rand = 50//Math.floor(Math.random() * (101 - 1)+ 1);
+        this.rand = Math.floor(Math.random() * (101 - 1)+ 1);
         this.error = "Invalid Answer"
         this.guesses = []
         this.guessNumber = null
